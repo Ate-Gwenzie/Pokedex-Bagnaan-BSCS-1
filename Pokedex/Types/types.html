@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Pokémon Types</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Irish Grover', cursive;
+            background-color: #f0f0f0;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header {
+            background-color: #da771b;
+            background-position: center;
+            padding: 60px 20px;
+            height: 50%;
+            color: #fff;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .header h1 {
+            font-size: 30px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            color: #333 !important;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f48e36 !important;
+        }
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-top {
+            padding: 20px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .card-title {
+            font-size: 24px;
+        }
+
+        .card-details {
+            font-size: 16px;
+            text-align: left;
+            padding: 0 1rem 1rem 1rem;
+            color: #555;
+        }
+
+        .footer {
+            background-color: #f48e36;
+            color: #fff;
+            padding: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .dark-mode {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+        }
+
+        .dark-mode .header {
+            background-color: #e06c75;
+        }
+
+        .dark-mode .navbar-light .navbar-nav .nav-link {
+            color: #000000 !important;
+        }
+
+        .dark-mode .navbar-light .navbar-nav .nav-link:hover {
+            color: #b96c95 !important;
+        }
+
+        .dark-mode .card {
+            background-color: #333;
+            color: #eee;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .card-details {
+            color: #ccc;
+        }
+
+        .dark-mode .footer {
+            background-color: #e06c75; 
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000; 
+            opacity: 0.8;
+            transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            opacity: 1;
+            background-color: #555;
+        }
+
+        .dark-mode .dark-mode-toggle {
+            background-color: #f8f8f2;
+            color: #333;
+        }
+
+        .dark-mode .dark-mode-toggle:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Pokedex-Types</h1>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/home/home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Types/types.html">Types</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Abilities/abilities.html">Abilities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Favorites/favorites.html">Favorites</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="confirmExit()">Exit</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <h2 class="text-center mb-5">Pokémon Types</h2>
+        <div class="row g-4" id="pokemon-types-list">
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="card-img-top" alt="Normal Type">
+                    <h5 class="card-title">Normal</h5>
+                    <div class="card-details">
+                        <p>A versatile type with no major strengths or weaknesses.</p>
+                        <p><strong>Strengths:</strong> None</p>
+                        <p><strong>Weaknesses:</strong> Fighting</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="card-img-top" alt="Fire Type">
+                    <h5 class="card-title">Fire</h5>
+                    <div class="card-details">
+                        <p>Strong against Grass, Ice, Bug, and Steel types.</p>
+                        <p><strong>Strengths:</strong> Grass, Ice, Bug, Steel</p>
+                        <p><strong>Weaknesses:</strong> Water, Ground, Rock</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="card-img-top" alt="Water Type">
+                    <h5 class="card-title">Water</h5>
+                    <div class="card-details">
+                        <p>Strong against Fire, Ground, and Rock types.</p>
+                        <p><strong>Strengths:</strong> Fire, Ground, Rock</p>
+                        <p><strong>Weaknesses:</strong> Electric, Grass</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png" class="card-img-top" alt="Grass Type">
+                    <h5 class="card-title">Grass</h5>
+                    <div class="card-details">
+                        <p>Strong against Water, Ground, and Rock types.</p>
+                        <p><strong>Strengths:</strong> Water, Ground, Rock</p>
+                        <p><strong>Weaknesses:</strong> Fire, Ice, Poison, Flying, Bug</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" class="card-img-top" alt="Electric Type">
+                    <h5 class="card-title">Electric</h5>
+                    <div class="card-details">
+                        <p>Strong against Water and Flying types.</p>
+                        <p><strong>Strengths:</strong> Water, Flying</p>
+                        <p><strong>Weaknesses:</strong> Ground</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png" class="card-img-top" alt="Bug Type">
+                    <h5 class="card-title">Bug</h5>
+                    <div class="card-details">
+                        <p>Strong against Grass, Psychic, and Dark types.</p>
+                        <p><strong>Strengths:</strong> Grass, Psychic, Dark</p>
+                        <p><strong>Weaknesses:</strong> Fire, Flying, Rock</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png" class="card-img-top" alt="Flying Type">
+                    <h5 class="card-title">Flying</h5>
+                    <div class="card-details">
+                        <p>Strong against Grass, Fighting, and Bug types.</p>
+                        <p><strong>Strengths:</strong> Grass, Fighting, Bug</p>
+                        <p><strong>Weaknesses:</strong> Electric, Ice, Rock</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png" class="card-img-top" alt="Poison Type">
+                    <h5 class="card-title">Poison</h5>
+                    <div class="card-details">
+                        <p>Strong against Grass and Fairy types.</p>
+                        <p><strong>Strengths:</strong> Grass, Fairy</p>
+                        <p><strong>Weaknesses:</strong> Ground, Psychic</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/50.png" class="card-img-top" alt="Ground Type">
+                    <h5 class="card-title">Ground</h5>
+                    <div class="card-details">
+                        <p>Strong against Fire, Electric, Poison, Rock, and Steel types.</p>
+                        <p><strong>Strengths:</strong> Fire, Electric, Poison, Rock, Steel</p>
+                        <p><strong>Weaknesses:</strong> Water, Grass, Ice</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png" class="card-img-top" alt="Fighting Type">
+                    <h5 class="card-title">Fighting</h5>
+                    <div class="card-details">
+                        <p>Strong against Normal, Ice, Rock, Dark, and Steel types.</p>
+                        <p><strong>Strengths:</strong> Normal, Ice, Rock, Dark, Steel</p>
+                        <p><strong>Weaknesses:</strong> Flying, Psychic, Fairy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png" class="card-img-top" alt="Rock Type">
+                    <h5 class="card-title">Rock</h5>
+                    <div class="card-details">
+                        <p>Strong against Flying, Bug, Fire, and Ice types.</p>
+                        <p><strong>Strengths:</strong> Flying, Bug, Fire, Ice</p>
+                        <p><strong>Weaknesses:</strong> Water, Grass, Fighting, Ground, Steel</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png" class="card-img-top" alt="Ghost Type">
+                    <h5 class="card-title">Ghost</h5>
+                    <div class="card-details">
+                        <p>Strong against Ghost and Psychic types.</p>
+                        <p><strong>Strengths:</strong> Ghost, Psychic</p>
+                        <p><strong>Weaknesses:</strong> Ghost, Dark</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/122.png" class="card-img-top" alt="Psychic Type">
+                    <h5 class="card-title">Psychic</h5>
+                    <div class="card-details">
+                        <p>Strong against Fighting and Poison types.</p>
+                        <p><strong>Strengths:</strong> Fighting, Poison</p>
+                        <p><strong>Weaknesses:</strong> Bug, Ghost, Dark</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/147.png" class="card-img-top" alt="Ice Type">
+                    <h5 class="card-title">Ice</h5>
+                    <div class="card-details">
+                        <p>Strong against Flying, Ground, Grass, and Dragon types.</p>
+                        <p><strong>Strengths:</strong> Flying, Ground, Grass, Dragon</p>
+                        <p><strong>Weaknesses:</strong> Fire, Fighting, Rock, Steel</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/246.png" class="card-img-top" alt="Dragon Type">
+                    <h5 class="card-title">Dragon</h5>
+                    <div class="card-details">
+                        <p>Strong against Dragon types.</p>
+                        <p><strong>Strengths:</strong> Dragon</p>
+                        <p><strong>Weaknesses:</strong> Ice, Dragon, Fairy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png" class="card-img-top" alt="Dark Type">
+                    <h5 class="card-title">Dark</h5>
+                    <div class="card-details">
+                        <p>Strong against Ghost and Psychic types.</p>
+                        <p><strong>Strengths:</strong> Ghost, Psychic</p>
+                        <p><strong>Weaknesses:</strong> Fighting, Bug, Fairy</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/374.png" class="card-img-top" alt="Steel Type">
+                    <h5 class="card-title">Steel</h5>
+                    <div class="card-details">
+                        <p>Strong against Ice, Rock, and Fairy types.</p>
+                        <p><strong>Strengths:</strong> Ice, Rock, Fairy</p>
+                        <p><strong>Weaknesses:</strong> Fire, Fighting, Ground</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/707.png" class="card-img-top" alt="Fairy Type">
+                    <h5 class="card-title">Fairy</h5>
+                    <div class="card-details">
+                        <p>Strong against Fighting, Dragon, and Dark types.</p>
+                        <p><strong>Strengths:</strong> Fighting, Dragon, Dark</p>
+                        <p><strong>Weaknesses:</strong> Poison, Steel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer text-center">
+        <p>PokeDex App &copy; 2025</p>
+    </footer>
+
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        🌙 Dark Mode
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const body = document.body;
+        const header = document.querySelector('.header');
+        const navbar = document.querySelector('.navbar');
+        const main = document.querySelector('main');
+        const footerElement = document.querySelector('.footer');
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const typeCards = document.querySelectorAll('.card');
+        const cardTitles = document.querySelectorAll('.card-title');
+        const cardDetails = document.querySelectorAll('.card-details');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const storedDarkMode = localStorage.getItem('darkMode');
+            if (storedDarkMode === 'true') {
+                applyDarkMode();
+            }
+        });
+
+        function confirmExit() {
+            if (confirm("Are you sure you want to exit the Pokedex?")) {
+                window.close();
+            }
+        }
+
+        function applyDarkMode() {
+            body.classList.add('dark-mode');
+            header.classList.add('dark-mode');
+            navbar.classList.add('dark-mode');
+            main.classList.add('dark-mode');
+            footerElement.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️ Light Mode';
+            typeCards.forEach(card => card.classList.add('dark-mode'));
+            cardTitles.forEach(title => title.classList.add('dark-mode'));
+            cardDetails.forEach(details => details.classList.add('dark-mode'));
+            localStorage.setItem('darkMode', 'true');
+        }
+
+        function applyLightMode() {
+            body.classList.remove('dark-mode');
+            header.classList.remove('dark-mode');
+            navbar.classList.remove('dark-mode');
+            main.classList.remove('dark-mode');
+            footerElement.classList.remove('dark-mode');
+            darkModeToggle.textContent = '🌙 Dark Mode';
+            typeCards.forEach(card => card.classList.remove('dark-mode'));
+            cardTitles.forEach(title => title.classList.remove('dark-mode'));
+            cardDetails.forEach(details => details.classList.remove('dark-mode'));
+            localStorage.setItem('darkMode', 'false');
+        }
+
+        function toggleDarkMode() {
+            if (body.classList.contains('dark-mode')) {
+                applyLightMode();
+            } else {
+                applyDarkMode();
+            }
+        }
+    </script>
+</body>
+</html>

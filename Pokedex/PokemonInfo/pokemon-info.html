@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family:'Irish Grover', cursive;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding-top: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .pokemon-info-container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .pokemon-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .pokemon-image-large {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .pokemon-name-large {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: capitalize;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .pokemon-id-large {
+            color: #777;
+            font-size: 1.1rem;
+        }
+
+        .basic-info-box {
+            background-color: #f48e36;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .basic-info-box strong {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #000000;
+        }
+
+        .description-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            color: #000000;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .versions-box {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .versions-box img {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+
+        .type-weakness-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .type-box, .weakness-box {
+            flex: 1;
+        }
+
+        .type-box h3, .weakness-box h3 {
+            font-size: 1.2rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-radius: 20px;
+            color: #1e1e1e;
+            font-weight: bold;
+            text-transform: capitalize;
+            font-size: 0.9rem;
+        }
+
+        .type-grass {
+            background-color: #9bcc50;
+        }
+
+        .type-poison {
+            background-color: #b97fc9;
+        }
+
+        .weakness-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: bold;
+            text-transform: capitalize;
+            font-size: 0.9rem;
+        }
+
+        .weakness-fire {
+            background-color: #fd7d24;
+        }
+
+        .weakness-ice {
+            background-color: #51c2e7;
+        }
+
+        .weakness-flying {
+            background-color: #a890f0;
+        }
+
+        .weakness-psychic {
+            background-color: #f366b9;
+        }
+
+        .stats-box {
+            margin-top: 20px;
+        }
+
+        .stats-box h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .stat-bar-container {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            color: #1e1e1e;
+        }
+
+        .stat-label {
+            width: 80px;
+            font-weight: bold;
+            margin-right: 10px;
+            text-align: left;
+        }
+
+        .stat-bar {
+            background-color: #f48e36;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .evolutions-box {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        .evolutions-box h3 {
+            font-size: 1.2rem;
+            color: #1e1e1e;
+            margin-bottom: 15px;
+        }
+
+        .evolution-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .evolution-pokemon {
+            text-align: center;
+        }
+
+        .evolution-pokemon img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .evolution-pokemon p {
+            font-size: 0.9rem;
+            color: #555;
+            text-transform: capitalize;
+            margin: 0;
+        }
+
+        .evolution-arrow {
+            font-size: 1.5rem;
+            color: #ccc;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 3rem;
+        }
+
+        .action-buttons button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #add-favorite-btn {
+            background-color: #e65967;
+            color: #1e1e1e;
+            border: none;
+        }
+
+        #add-favorite-btn:hover {
+            background-color: #d14d5a;
+        }
+
+        #return-home-btn {
+            background-color: #6b6b6b;
+            color: #000000;
+            border: none;
+        }
+
+        #return-home-btn:hover {
+            background-color: #5a6268;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #000000;
+        }
+
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+        }
+
+        .pokemon-info-container.dark-mode {
+            background-color: #333;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .pokemon-name-large.dark-mode {
+            color: #eee;
+        }
+
+        .pokemon-id-large.dark-mode {
+            color: #ccc;
+        }
+
+        .basic-info-box.dark-mode {
+            background-color: #2a475e;
+            color: #d1d1d1;
+        }
+
+        .basic-info-box.dark-mode strong {
+            color: #89bdd3;
+        }
+
+        .description-box.dark-mode {
+            background-color: #444;
+            border-color: #555;
+            color: #ccc;
+        }
+        .type-box h3.dark-mode, .weakness-box h3.dark-mode, .stats-box h3.dark-mode, .evolutions-box h3.dark-mode {
+            color: #eee;
+        }
+
+        .stats-box.dark-mode .stat-bar-container {
+            background-color: #444;
+            color: #ccc;
+        }
+
+        .stats-box.dark-mode .stat-label {
+            color: #eee;
+        }
+
+        .stats-box.dark-mode .stat-bar {
+            background-color: #89bdd3;
+        }
+
+        .evolutions-box.dark-mode {
+            background-color: #444;
+            border-color: #555;
+        }
+        .evolution-arrow.dark-mode {
+            color: #1e1e1e;
+        }
+        footer.dark-mode {
+            background-color: #e06c75;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="pokemon-info-container">
+        <div id="pokemon-info">
+            <div class="pokemon-header">
+                <img id="pokemon-image" src="" alt="" class="pokemon-image-large">
+                <h2 id="pokemon-name" class="pokemon-name-large"></h2>
+                <p id="pokemon-number" class="pokemon-id-large"></p>
+            </div>
+            <div id="basic-info" class="basic-info-box">
+                <div><strong>Height</strong> <span id="pokemon-height"></span></div>
+                <div><strong>Weight</strong> <span id="pokemon-weight"></span></div>
+                <div><strong>Category</strong> <span id="pokemon-category"></span></div>
+                <div><strong>Abilities</strong> <span id="pokemon-abilities"></span></div>
+                <div><strong>Gender</strong> <span id="pokemon-gender"></span></div>
+            </div>
+            <div id="pokemon-description" class="description-box">
+            </div>
+            <div class="versions-box">
+                <strong>Versions:</strong>
+            </div>
+            <div class="type-weakness-container">
+                <div class="type-box">
+                    <h3 class="type-box-title">Type</h3>
+                    <div id="pokemon-types">
+                        </div>
+                </div>
+                <div class="weakness-box">
+                    <h3 class="weakness-box-title">Weaknesses</h3>
+                    <div id="pokemon-weaknesses">
+                        </div>
+                </div>
+            </div>
+            <div class="stats-box">
+                <h3>Base Stats</h3>
+                <div id="pokemon-stats">
+                    </div>
+            </div>
+            <div class="evolutions-box">
+                <h3>Evolutions</h3>
+                <div id="evolution-line" class="evolution-line">
+                    </div>
+            </div>
+        </div>
+        <div class="action-buttons">
+            <button id="add-favorite-btn" class="btn btn-danger" disabled><i class="fas fa-heart"></i> Add to Favorites</button>
+            <button id="return-home-btn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Return Home</button>
+        </div>
+    </div>
+    <footer>
+        <p>PokeDex App</p>
+        <p>All rights reserved © 2025</p>
+        <p>You may contact me to Bagnaan@gmail.com</p>
+    </footer>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const pokemonId = urlParams.get('id');
+        const pokemonInfoDiv = document.getElementById('pokemon-info');
+        const addFavoriteBtn = document.getElementById('add-favorite-btn');
+        const returnHomeBtn = document.getElementById('return-home-btn');
+        const body = document.body;
+        const mainContainer = document.querySelector('.pokemon-info-container');
+        const footerElement = document.querySelector('footer');
+        const pokemonImage = document.getElementById('pokemon-image');
+        const pokemonName = document.getElementById('pokemon-name');
+        const pokemonNumber = document.getElementById('pokemon-number');
+        const basicInfoBox = document.getElementById('basic-info');
+        const pokemonHeight = document.getElementById('pokemon-height');
+        const pokemonWeight = document.getElementById('pokemon-weight');
+        const pokemonCategory = document.getElementById('pokemon-category');
+        const pokemonAbilities = document.getElementById('pokemon-abilities');
+        const pokemonGender = document.getElementById('pokemon-gender');
+        const pokemonTypes = document.getElementById('pokemon-types');
+        const pokemonWeaknesses = document.getElementById('pokemon-weaknesses');
+        const pokemonStats = document.getElementById('pokemon-stats');
+        const evolutionLineDiv = document.getElementById('evolution-line');
+        const pokemonDescriptionDiv = document.getElementById('pokemon-description');
+        const versionsBox = document.querySelector('.versions-box');
+
+        const homePageUrl ='/home/home.html';
+
+        returnHomeBtn.addEventListener('click', () => {
+            window.location.href = homePageUrl;
+        });
+
+        async function fetchPokemonInfo() {
+            if (pokemonId) {
+                try {
+                    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+                    const pokemon = await response.json();
+                    const speciesResponse = await fetch(pokemon.species.url);
+                    const speciesData = await speciesResponse.json();
+                    const evolutionChainResponse = await fetch(speciesData.evolution_chain.url);
+                    const evolutionChainData = await evolutionChainResponse.json();
+
+                    pokemonImage.src = pokemon.sprites.front_default;
+                    pokemonImage.alt = pokemon.name;
+                    pokemonName.textContent = pokemon.name;
+                    pokemonNumber.textContent = `#${pokemon.id.toString().padStart(3, '0')}`;
+                    pokemonHeight.textContent = `${pokemon.height / 10} m`;
+                    pokemonWeight.textContent = `${pokemon.weight / 10} kg`;
+                    pokemonAbilities.textContent = pokemon.abilities.map(ability => ability.ability.name).join(', ');
+                    pokemonTypes.innerHTML = pokemon.types.map(type => `<span class="type-badge type-<span class="math-inline">\{type\.type\.name\}"\></span>{type.type.name}</span>`).join('');
+
+                    pokemonCategory.textContent = speciesData.genera.find(genus => genus.language.name === 'en')?.genus || 'Unknown';
+                    pokemonGender.textContent = speciesData.has_gender_differences ? '♂♀' : (speciesData.forms_switchable ? '♂♀' : '—');
+
+                    const typeNames = pokemon.types.map(type => type.type.name);
+                    const weaknesses = getWeaknesses(typeNames);
+                    pokemonWeaknesses.innerHTML = weaknesses.map(weakness => `<span class="weakness-badge weakness-<span class="math-inline">\{weakness\.toLowerCase\(\)\}"\></span>{weakness}</span>`).join('');
+
+                pokemonStats.innerHTML = pokemon.stats.map(stat => `
+                    <div class="stat-bar-container">
+                        <span class="stat-label">${stat.stat.name.toUpperCase()}</span>
+                        <div class="stat-bar" style="width: ${stat.base_stat}px;"></div>
+                        <span>${stat.base_stat}</span>
+                    </div>
+                `).join('');
+
+                const flavorTextEntry = speciesData.flavor_text_entries.find(entry => entry.language.name === 'en');
+                pokemonDescriptionDiv.textContent = flavorTextEntry?.flavor_text.replace(/[\n\f]/g, " ") || '';
+
+                versionsBox.innerHTML += `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/${pokemonId}.png" alt="Red/Blue">`;
+                versionsBox.innerHTML += `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/gold-silver/${pokemonId}.png" alt="Gold/Silver">`;
+
+                displayEvolutionChain(evolutionChainData);
+                addFavoriteBtn.disabled = false;
+
+                const storedDarkMode = localStorage.getItem('darkMode');
+                if (storedDarkMode === 'true') {
+                    applyDarkMode();
+                }
+
+                addFavoriteBtn.addEventListener('click', () => {
+                    addPokemonToFavorites(pokemon);
+                });
+
+            } catch (error) {
+                console.error("Error fetching Pokemon info:", error);
+                pokemonInfoDiv.innerHTML = '<p class="text-danger"><i class="fas fa-exclamation-triangle"></i> Failed to load Pokémon details. Please try again later.</p>';
+            }
+        } else {
+            pokemonInfoDiv.innerHTML = '<p class="text-danger"><i class="fas fa-exclamation-circle"></i> Pokémon ID not provided.</p>';
+        }
+    }
+
+    async function displayEvolutionChain(evolutionChain) {
+        let current = evolutionChain.chain;
+        const chain = [];
+
+        while (current) {
+            const speciesName = current.species.name;
+            const speciesUrl = current.species.url;
+            const speciesIdMatch = speciesUrl.match(/\/(\d+)\//);
+            const speciesId = speciesIdMatch ? speciesIdMatch[1] : null;
+
+            if (speciesId) {
+                const speciesDetailsResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${speciesId}/`);
+                const speciesDetails = await speciesDetailsResponse.json();
+                const pokemonName = speciesDetails.varieties[0].pokemon.name;
+                const pokemonDetailsResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`);
+                const pokemonDetails = await pokemonDetailsResponse.json();
+
+                chain.push({
+                    name: pokemonName,
+                    imageUrl: pokemonDetails.sprites.front_default,
+                    id: speciesId
+                });
+            }
+
+            if (current.evolves_to && current.evolves_to.length > 0) {
+                chain.push('arrow');
+                current = current.evolves_to[0];
+            } else {
+                current = null;
+            }
+        }
+
+        evolutionLineDiv.innerHTML = chain.map(item => {
+            if (item === 'arrow') {
+                return '<span class="evolution-arrow"><i class="fas fa-chevron-right"></i></span>';
+            } else {
+                return `
+                    <div class="evolution-pokemon">
+                        <img src="${item.imageUrl}" alt="${item.name}">
+                        <p>${item.name}</p>
+                    </div>
+                `;
+            }
+        }).join('');
+    }
+
+    function getWeaknesses(types) {
+        const weaknesses = new Set();
+        if (types.includes('grass') || types.includes('poison')) {
+            weaknesses.add('Fire');
+            weaknesses.add('Flying');
+            weaknesses.add('Psychic');
+            weaknesses.add('Ice');
+        }
+        return Array.from(weaknesses);
+    }
+function addPokemonToFavorites(pokemon) {
+    let favorites = localStorage.getItem('favoritePokemon');
+    favorites = favorites ? JSON.parse(favorites) : [];
+    const isAlreadyFavorite = favorites.some(fav => fav.id === pokemon.id);
+    if (isAlreadyFavorite) {
+        alert(`${pokemon.name} is already in your favorites!`);
+        return;
+    }
+    favorites.push({
+        id: pokemon.id,
+        name: pokemon.name,
+        imageUrl: pokemon.sprites.front_default,
+        types: pokemon.types.map(type => type.type.name)
+    });
+    localStorage.setItem('favoritePokemon', JSON.stringify(favorites));
+    alert(`${pokemon.name} has been added to your favorites!`);
+}
+
+    function applyDarkMode() {
+        body.classList.add('dark-mode');
+        mainContainer.classList.add('dark-mode');
+        const typeBoxTitle = document.querySelector('.type-box-title');
+        const weaknessBoxTitle = document.querySelector('.weakness-box-title');
+        const statsBoxTitle = document.querySelector('.stats-box h3');
+        const evolutionsBoxTitle = document.querySelector('.evolutions-box h3');
+
+        if (typeBoxTitle) typeBoxTitle.classList.add('dark-mode');
+        if (weaknessBoxTitle) weaknessBoxTitle.classList.add('dark-mode');
+        if (statsBoxTitle) statsBoxTitle.classList.add('dark-mode');
+        if (evolutionsBoxTitle) evolutionsBoxTitle.classList.add('dark-mode');
+
+        const weaknessBadges = document.querySelectorAll('.weakness-badge');
+        weaknessBadges.forEach(badge => badge.classList.add('dark-mode'));
+        const statContainers = document.querySelectorAll('.stats-box .stat-bar-container');
+        statContainers.forEach(container => container.classList.add('dark-mode'));
+        const evolutionArrows = document.querySelectorAll('.evolution-arrow');
+        evolutionArrows.forEach(arrow => arrow.classList.add('dark-mode'));
+        footerElement.classList.add('dark-mode');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchPokemonInfo();
+        const storedDarkMode = localStorage.getItem('darkMode');
+        if (storedDarkMode === 'true') {
+            applyDarkMode();
+        }
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

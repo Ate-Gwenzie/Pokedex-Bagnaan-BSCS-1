@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abilities - Pokedex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Irish Grover', cursive;
+            background-color: #f0f0f0;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #da771b;
+            background-position: center;
+            padding: 60px 20px;
+            color: #fff;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-bottom: 0; /* Remove default margin below header */
+        }
+
+        .header h1 {
+            font-size: 30px;
+        }
+
+        .navbar {
+            background-color: #f8f9fa; /* Light grey navbar */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Add margin below navbar */
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            color: #333 !important;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f48e36 !important;
+        }
+
+        main {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        p.first {
+            font-weight: bold;
+            color: #1e1e1e; /* Blue text for the first paragraph */
+        }
+
+        .ability-container {
+            background-color: #f48e36;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgb(159, 69, 0);
+        }
+
+        .ability-container h3 {
+            color: #1e1e1e; /* Blue ability name */
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .col-sm-6, .col-md-4 {
+            flex: 0 0 calc(33.33% - 20px); 
+            max-width: calc(33.33% - 20px);
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 992px) {
+            .col-md-4 {
+                flex: 0 0 calc(50% - 20px); 
+                max-width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-sm-6 {
+                flex: 0 0 calc(50% - 20px); 
+                max-width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-sm-6 {
+                flex: 0 0 100%; 
+                max-width: 100%;
+            }
+        }
+
+        .pokemon-card {
+            background-color: #f8f9fa; 
+            border: 5px solid black;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+            width: 50%;
+            height:100%;
+        }
+
+        .pokemon-card:hover {
+            transform: scale(1.03);
+        }
+
+        .pokemon-image {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .pokemon-name {
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+
+        .pokemon-card p {
+            font-size: 0.9rem;
+            color: #000000;
+            margin-bottom: 0;
+        }
+
+        .footer {
+            background-color: #f48e36;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            /* Removed fixed positioning to avoid hover */
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .dark-mode {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+        }
+
+        .dark-mode .header {
+            background-color: #e06c75; 
+        }
+
+        .dark-mode .navbar {
+            background-color: #ffffff !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .navbar-light .navbar-nav .nav-link {
+            color: #000000 !important;
+        }
+
+        .dark-mode .navbar-light .navbar-nav .nav-link:hover {
+            color: #e06c75 !important;
+        }
+
+        .dark-mode h2 {
+            color: #ffffff;
+        }
+
+        .dark-mode p {
+            color: #ffeeee;
+        }
+
+        .dark-mode .ability-container {
+            background-color: #333;
+            color: #eee;
+            border-color: #555;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .ability-container h3 {
+            color: #dbdbdb; 
+        }
+
+        .dark-mode .pokemon-card {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #555;
+            box-shadow: 0 4px 16px #d62533;
+        }
+
+        .dark-mode .pokemon-name {
+            color: #eee;
+        }
+
+        .dark-mode .pokemon-card p {
+            color: #ccc;
+            background-color: white;
+        }
+
+        .dark-mode .footer {
+            background-color: #e06c75; 
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+            opacity: 0.8;
+            transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            opacity: 1;
+            background-color: #555;
+        }
+
+        .dark-mode .dark-mode-toggle {
+            background-color: #f8f8f2;
+            color: #333;
+        }
+
+        .dark-mode .dark-mode-toggle:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Pokémon Abilities</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/home/home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Types/types.html">Types</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Abilities/abilities.html">Abilities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Favorites/favorites.html">Favorites</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="confirmExit()">Exit</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container my-4">
+        <h2>Discover Pokémon Abilities</h2>
+        <p class="first">Each Pokémon has unique abilities that can influence battles and strategies. Here are some key abilities:</p>
+
+        <div class="ability-container">
+            <h3>Overgrow</h3>
+            <p>Powers up Grass-type moves when the Pokémon's HP is low.</p>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=1">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="Bulbasaur" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Bulbasaur</div>
+                        <p>#001</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=2">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png" alt="Ivysaur" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Ivysaur</div>
+                        <p>#002</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=3">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" alt="Venusaur" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Venusaur</div>
+                        <p>#003</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ability-container">
+            <h3>Blaze</h3>
+            <p>Powers up Fire-type moves when the Pokémon's HP is low.</p>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=4">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="Charmander" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Charmander</div>
+                        <p>#004</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=5">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png" alt="Charmeleon" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Charmeleon</div>
+                        <p>#005</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=6">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Charizard" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Charizard</div>
+                        <p>#006</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ability-container">
+            <h3>Torrent</h3>
+            <p>Powers up Water-type moves when the Pokémon's HP is low.</p>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=7">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="Squirtle" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Squirtle</div>
+                        <p>#007</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=8">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png" alt="Wartortle" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Wartortle</div>
+                        <p>#008</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=9">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png" alt="Blastoise" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Blastoise</div>
+                        <p>#009</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ability-container">
+            <h3>Intimidate</h3>
+            <p>Lowers the Attack stat of opposing Pokémon when the Pokémon enters battle.</p>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=20">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png" alt="Fearow" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Fearow</div>
+                        <p>#020</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=28">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/28.png" alt="Sandshrew" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Sandshrew</div>
+                        <p>#028</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=29">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/29.png" alt="Sandslash" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Sandslash</div>
+                        <p>#029</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ability-container">
+            <h3>Levitate</h3>
+            <p>Grants immunity to Ground-type moves.</p>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=92">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png" alt="Gastly" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Gastly</div>
+                        <p>#092</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=93">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/93.png" alt="Haunter" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Haunter</div>
+                        <p>#093</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 d-flex justify-content-center">
+                    <div class="pokemon-card">
+                        <a href="/PokemonInfo/pokemon-info.html?id=94">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="Gengar" class="pokemon-image" width="100">
+                        </a>
+                        <div class="pokemon-name">Gengar</div>
+                        <p>#094</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>PokeDex App - All rights reserved © 2025</p>
+        <p>You may contact me to Bagnaan@gmail.com</p>
+    </footer>
+
+    <button id="dark-mode-toggle" class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const body = document.body;
+        const header = document.querySelector('.header');
+        const navbar = document.querySelector('.navbar');
+        const main = document.querySelector('main');
+        const abilityContainers = document.querySelectorAll('.ability-container');
+        const pokemonCards = document.querySelectorAll('.pokemon-card');
+        const pokemonNames = document.querySelectorAll('.pokemon-name');
+        const footerElement = document.querySelector('.footer');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+        function applyDarkMode() {
+            body.classList.add('dark-mode');
+            header.classList.add('dark-mode');
+            navbar.classList.add('dark-mode');
+            main.classList.add('dark-mode');
+            abilityContainers.forEach(container => {
+                container.classList.add('dark-mode');
+                const h3 = container.querySelector('h3');
+                if (h3) {
+                    h3.classList.add('dark-mode');
+                }
+            });
+            pokemonCards.forEach(card => card.classList.add('dark-mode'));
+            pokemonNames.forEach(name => name.classList.add('dark-mode'));
+            footerElement.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️ Light Mode';
+        }
+
+        function applyLightMode() {
+            body.classList.remove('dark-mode');
+            header.classList.remove('dark-mode');
+            navbar.classList.remove('dark-mode');
+            main.classList.remove('dark-mode');
+            abilityContainers.forEach(container => {
+                container.classList.remove('dark-mode');
+                const h3 = container.querySelector('h3');
+                if (h3) {
+                    h3.classList.remove('dark-mode');
+                }
+            });
+            pokemonCards.forEach(card => card.classList.remove('dark-mode'));
+            pokemonNames.forEach(name => name.classList.remove('dark-mode'));
+            footerElement.classList.remove('dark-mode');
+            darkModeToggle.textContent = '🌙 Dark Mode';
+        }
+
+        function toggleDarkMode() {
+            if (body.classList.contains('dark-mode')) {
+                applyLightMode();
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                applyDarkMode();
+                localStorage.setItem('darkMode', 'true');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedDarkMode = localStorage.getItem('darkMode');
+            if (storedDarkMode === 'true') {
+                applyDarkMode();
+            }
+        });
+
+        function confirmExit() {
+            if (confirm("Are you sure you want to exit the Pokedex?")) {
+                window.close();
+            }
+        }
+    </script>
+</body>
+</html>
